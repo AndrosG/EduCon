@@ -6,30 +6,49 @@
 
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('profesores', {
-        id_alu: {
+        id: {
             type: DataTypes.INTEGER,
-            field: 'idProfesor',
+            field: 'id',
             primaryKey: true
         },
         nombre: {
             type: DataTypes.STRING,
-            field: 'nombre'
+            field: 'nombre',
+            validate: {
+                notNull: true
+            }
         },
         apellidos: {
             type: DataTypes.STRING,
-            field: 'apellidos'
+            field: 'apellidos',
+            validate: {
+                notNull: true
+            }
         },
         email: {
             type: DataTypes.STRING,
-            field: 'email'
+            field: 'email',
+            validate: {
+                isEmail: true
+            }
         },
         telefono: {
             type: DataTypes.INTEGER,
-            field: 'telefono'
+            field: 'telefono',
+            validate: {
+                notNull: true
+            }
         },
         departamento: {
             type: DataTypes.INTEGER,
-            field: 'departamento'
+            field: 'departamento',
+            validate: {
+                notNull: true
+            }
+        },
+        usuario: {
+            type: DataTypes.STRING,
+            field: 'usuario'
         },
         password: {
             type: DataTypes.STRING,
