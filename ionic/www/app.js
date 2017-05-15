@@ -7,57 +7,81 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+  .run(function ($ionicPlatform) {
+    $ionicPlatform.ready(function () {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-
-  $stateProvider
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
   })
-  .state('tab.login', {
-    url: '/login',
-    views: {
-      'tab-login': {
+
+  .config(function ($stateProvider, $urlRouterProvider) {
+
+    $stateProvider
+      .state('tab', {
+        url: '/tab',
+        abstract: true,
+        templateUrl: 'templates/tabs.html'
+      })
+      .state('login', {
+        url: '/login',
         templateUrl: 'login/login.html',
         controller: 'LoginCtrl'
-      }
-    }
-  })/*
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+      })
+      .state('tab.lista', {
+        url: '/lista',
+        views: {
+          'tab-lista': {
+            templateUrl: 'profesores/lista/prof-lista.html',
+            controller: 'PasarListaCtrl'
+          }
         }
-      }
-    })
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })*/;
-  $urlRouterProvider.otherwise('/tab/login');
+      })
+      .state('tab.calificaciones', {
+        url: '/calificaciones',
+        views: {
+          'tab-calificaciones': {
+            templateUrl: 'profesores/calificaciones/prof-calificaciones.html',
+            controller: 'CalificacionesCtrl'
+          }
+        }
+      })
+      .state('tab.perfil', {
+        url: '/perfil',
+        views: {
+          'tab-perfil': {
+            templateUrl: 'profesores/perfil/prof-perfil.html',
+            controller: 'PerfilCtrl'
+          }
+        }
+      })
+      .state('tab.horario', {
+        url: '/horario',
+        views: {
+          'tab-horario': {
+            templateUrl: 'profesores/horario/prof-horario.html',
+            controller: 'HorarioCtrl'
+          }
+        }
+      })
+      .state('tab.calendario', {
+        url: '/calendario',
+        views: {
+          'tab-calendario': {
+            templateUrl: 'profesores/calendario/prof-calendario.html',
+            controller: 'CalendarioCtrl'
+          }
+        }
+      });
+    $urlRouterProvider.otherwise('/login');
 
-});
+  })
+;

@@ -1,2 +1,7 @@
-/* Empty. Add your own CSS if you like */
-
+.checkboxAsistencia{
+  margin: 0px;
+  margin-left: 5px;
+  padding-right: 0px;
+  padding-left: 40px;
+  border: hidden 0px;
+}
