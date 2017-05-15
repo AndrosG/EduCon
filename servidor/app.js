@@ -15,28 +15,26 @@ app.set('modelos', require('./sequelize'));
 var modelos = app.get('modelos');
 
 cargarDatos()
-    .then(function () {
-        arrancarServicio();
-    })
+arrancarServicio()
 
 
 function arrancarServicio() {
     app.listen(PORT);
     console.log('Servidor escuchando en puerto ' + PORT)
+    console.log(modelos);
 }
 
 function cargarDatos() {
-
     //Conexión Sequelize
     modelos.sequelize
         .authenticate()
         .then(function () {
-            console.log('Conexión con éxito ala base de datos.');
+             console.log('Conexión con éxito ala base de datos.');
         }, function (err) {
             console.log('No se ha podido conectar a la base de datos. Error:', err);
         });
 
-    cargarAlumnos();
+    //cargarAlumnos();
 }
 
 function cargarAlumnos() {

@@ -5,8 +5,8 @@
 var Sequelize = require('sequelize');
 
 // inicializacion de conexion BD
-var sequelize = new Sequelize('u686993630_educo', 'root', 'educon', {
-    host: 'educon.esy.es',
+var sequelize = new Sequelize('educon', 'root', 'educon', {
+    host: 'localhost',
     dialect: 'mysql',
     define: {
         timestamps: false
@@ -22,11 +22,11 @@ var sequelize = new Sequelize('u686993630_educo', 'root', 'educon', {
 
 // carga de modelos
 var modelos = [
-    'profesores',
-    'alumnos',
+    //'profesores',
+    'alumnos'/*,
     'cursos',
     'asignaturas',
-    'notas'
+    'notas'*/
 ];
 modelos.forEach(function (modelo) {
     module.exports[modelo] = sequelize.import(__dirname + '/modelos/' + [modelo] +'.mapper.js');
