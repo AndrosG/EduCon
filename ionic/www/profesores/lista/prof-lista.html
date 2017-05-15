@@ -1,0 +1,29 @@
+<ion-view>
+  <ion-header-bar class="bar-dark" align-title="center">
+    <h1 class="title">PASAR LISTA</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <div class="card" ng-repeat="asig in asignaturas">
+        <div class="item item-divider" ng-click="asig.showAsig = !asig.showAsig">
+          {{asig.curso}} - {{asig.nombre}}
+        </div>
+        <div class="item item-text-wrap" ng-if="asig.showAsig">
+          <div class="list">
+            <div class="item" ng-repeat="alum in asig.alumnos | orderBy:'nombre'">
+              {{alum.nombre}} {{alum.apellidos}}
+              <div style="float: right;">
+                <ion-checkbox style="float: right;"
+                              class="checkbox-assertive checkboxAsistencia"
+                              ng-model="alum.falta"></ion-checkbox>
+                <ion-checkbox style="float: right;"
+                              class="checkbox-energized checkboxAsistencia"
+                              ng-model="alum.retraso"></ion-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
