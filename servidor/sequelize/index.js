@@ -28,6 +28,7 @@ var modelos = [
     'asignaturas',
     'notas'*/
 ];
+
 modelos.forEach(function (modelo) {
     module.exports[modelo] = sequelize.import(__dirname + '/modelos/' + [modelo] +'.mapper.js');
    // module.exports[modelo] = sequelize.import(__dirname + '/servicios/' + [modelo] +'.srv.js');
