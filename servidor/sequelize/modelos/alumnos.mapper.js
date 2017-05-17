@@ -6,9 +6,9 @@
 
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('alumnos', {
-        id_alu: {
+        id: {
             type: DataTypes.INTEGER,
-            field: 'idAlumno',
+            field: 'id',
             primaryKey: true
         },
         nombre: {
@@ -29,7 +29,11 @@ module.exports = function (sequelize, DataTypes) {
         },
         curso: {
             type: DataTypes.INTEGER,
-            field: 'curso'
+            field: 'curso',
+            references: {
+                model: 'cursos',
+                key: 'id',
+            }
         },
         password: {
             type: DataTypes.STRING,
