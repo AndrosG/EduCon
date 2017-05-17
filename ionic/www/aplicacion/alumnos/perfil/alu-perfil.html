@@ -1,0 +1,31 @@
+<ion-view>
+  <ion-header-bar class="bar-dark" align-title="center">
+    <h1 class="title">PERFIL</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <form>
+      <div class="list">
+        <h3>Datos personales</h3>
+        <label class="item item-input">
+          <input type="number" placeholder="Nº Teléfono" ng-model="telefono"/>
+        </label>
+        <label class="item item-input">
+          <input type="email" placeholder="Email*" required ng-model="email"/>
+        </label>
+        <button class="button button-block button-positive">GUARDAR</button>
+        <h3>Datos de usuario</h3>
+        <label class="item item-input">
+          <input type="password" placeholder="Contraseña actual*" required ng-model="passActual"/>
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Nueva contraseña*" required ng-model="passNueva"/>
+        </label>
+        <label class="item item-input">
+          <input type="password" placeholder="Confirmar nueva contraseña*" required ng-model="passAComprobar"/>
+        </label>
+      </div>
+      <button class="button button-block button-positive">CAMBIAR CONTRASEÑA</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

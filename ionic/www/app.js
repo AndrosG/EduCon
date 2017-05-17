@@ -31,16 +31,22 @@ angular.module('starter', ['ionic'])
         abstract: true,
         templateUrl: 'templates/tabs.html'
       })
+
+      //------------- LOGIN -------------------------------------------
+
       .state('login', {
         url: '/login',
-        templateUrl: 'login/login.html',
+        templateUrl: 'aplicacion/login/login.html',
         controller: 'LoginCtrl'
       })
+
+      //------------- PROFESORES --------------------------------------
+
       .state('tab.lista', {
         url: '/lista',
         views: {
           'tab-lista': {
-            templateUrl: 'profesores/lista/prof-lista.html',
+            templateUrl: 'aplicacion/profesores/lista/prof-lista.html',
             controller: 'PasarListaCtrl'
           }
         }
@@ -49,7 +55,7 @@ angular.module('starter', ['ionic'])
         url: '/calificaciones',
         views: {
           'tab-calificaciones': {
-            templateUrl: 'profesores/calificaciones/prof-calificaciones.html',
+            templateUrl: 'aplicacion/profesores/calificaciones/prof-calificaciones.html',
             controller: 'CalificacionesCtrl'
           }
         }
@@ -58,7 +64,7 @@ angular.module('starter', ['ionic'])
         url: '/perfil',
         views: {
           'tab-perfil': {
-            templateUrl: 'profesores/perfil/prof-perfil.html',
+            templateUrl: 'aplicacion/profesores/perfil/prof-perfil.html',
             controller: 'PerfilCtrl'
           }
         }
@@ -67,7 +73,7 @@ angular.module('starter', ['ionic'])
         url: '/horario',
         views: {
           'tab-horario': {
-            templateUrl: 'profesores/horario/prof-horario.html',
+            templateUrl: 'aplicacion/profesores/horario/prof-horario.html',
             controller: 'HorarioCtrl'
           }
         }
@@ -76,11 +82,56 @@ angular.module('starter', ['ionic'])
         url: '/calendario',
         views: {
           'tab-calendario': {
-            templateUrl: 'profesores/calendario/prof-calendario.html',
+            templateUrl: 'aplicacion/profesores/calendario/prof-calendario.html',
             controller: 'CalendarioCtrl'
           }
         }
       });
+
+      //------------- ALUMNOS ------------------------------------------
+    $stateProvider
+      .state('tab-alu', {
+        url: '/tab-alu',
+        abstract: true,
+        templateUrl: 'templates/tabs-alu.html'
+      })
+      .state('tab-alu.calendario', {
+        url: '/alu-calendario',
+        views: {
+          'tab-alu-calendario': {
+            templateUrl: 'aplicacion/alumnos/calendario/alu-calendario.html',
+            controller: 'AluCalendarioCtrl'
+          }
+        }
+      })
+      .state('tab-alu.horario', {
+        url: '/alu-horario',
+        views: {
+          'tab-alu-horario': {
+            templateUrl: 'aplicacion/alumnos/horario/alu-horario.html',
+            controller: 'AluHorarioCtrl'
+          }
+        }
+      })
+      .state('tab-alu.notas', {
+        url: '/alu-notas',
+        views: {
+          'tab-alu-notas': {
+            templateUrl: 'aplicacion/alumnos/notas/alu-notas.html',
+            controller: 'AluNotasCtrl'
+          }
+        }
+      })
+      .state('tab-alu.perfil', {
+        url: '/alu-perfil',
+        views: {
+          'tab-alu-perfil': {
+            templateUrl: 'aplicacion/alumnos/perfil/alu-perfil.html',
+            controller: 'AluPerfilCtrl'
+          }
+        }
+      });
+
     $urlRouterProvider.otherwise('/login');
 
   })
