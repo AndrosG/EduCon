@@ -2,26 +2,47 @@ angular.module('starter')
   .controller('LoginCtrl', loginCtrl);
 
 function loginCtrl($scope, $state, $http) {
-  var SERVERURL = 'http://10.1.1.138:9095';
+  var SERVERURL = 'http://80.49.113.168:9095';
 
   $scope.variables = {
     showAlumnos: false,
     showProfesores: false
   };
 
-  $scope.entrar = function (user) {
+  $scope.entrar = function (user, id, pass) {
+    $http.post(SERVERURL + '/test')
+      .then(function (result) {
+        console.log(result);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
     if(user == 'alu'){
-      $state.go('tab-alu.notas');
+      if(id && pass){
+        $http.post(SERVERURL + '/alumnos', {id: id})
+          .then(function (result) {
+            console.log(result);
+            $state.go('tab-alu.notas');
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
+      } else {
+        console.log('Fallo');
+      }
     } else {
-      $state.go('tab.lista');
+      if(id && pass){
+        $http.post(SERVERURL + '/profesores', {id: id})
+          .then(function (result) {
+            console.log(result);
+            $state.go('tab.lista');
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
+      } else {
+        console.log('Fallo');
+      }
     }
   }
-
-  $http.post(SERVERURL +'/alumnos', {id: 1})
-    .then(function (result) {
-      console.log(result);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
 }

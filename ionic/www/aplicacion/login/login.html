@@ -1,5 +1,5 @@
 <ion-view>
-  <ion-header-bar class="bar-dark" align-title="center">
+  <ion-header-bar class="bar-calm" align-title="center">
     <h1 class="title">LOGIN</h1>
   </ion-header-bar>
   <ion-content class="padding">
@@ -10,13 +10,13 @@
       <div class="item item-text-wrap" ng-if="variables.showAlumnos">
         <div class="list">
           <label class="item item-input">
-            <input type="number" placeholder="NRE"/>
+            <input type="number" placeholder="NRE" ng-model="nre"/>
           </label>
           <label class="item item-input">
-            <input type="password" placeholder="Contraseña"/>
+            <input type="password" placeholder="Contraseña" ng-model="aluPass"/>
           </label>
         </div>
-        <button class="button button-block button-positive" ng-click="entrar('alu')">ENTRAR</button>
+        <button class="button button-block button-positive" ng-click="entrar('alu', nre, aluPass)">ENTRAR</button>
       </div>
     </div>
 
@@ -27,13 +27,13 @@
       <div ng-if="variables.showProfesores" class="item item-text-wrap">
         <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="Usuario"/>
+            <input type="text" placeholder="Usuario" ng-model="usuario"/>
           </label>
           <label class="item item-input">
-            <input type="password" placeholder="Contraseña"/>
+            <input type="password" placeholder="Contraseña" ng-model="profPass"/>
           </label>
         </div>
-        <button class="button button-block button-positive" ng-click="entrar('prof')">ENTRAR</button>
+        <button class="button button-block button-positive" ng-click="entrar('prof', usuario, profPass)">ENTRAR</button>
       </div>
     </div>
   </ion-content>

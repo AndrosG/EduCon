@@ -1,8 +1,19 @@
 <ion-view>
-  <ion-header-bar class="bar-dark" align-title="center">
+  <ion-header-bar class="bar-calm" align-title="center">
     <h1 class="title">CALENDARIO</h1>
+    <button class="button button-icon ion-android-add-circle" ng-click="addEvento()"></button>
   </ion-header-bar>
   <ion-content class="padding">
-
+    <div class="card" ng-repeat="e in eventos | orderBy:'fecha'">
+      <div class="item item-divider">
+        {{e.titulo}}
+        <button class="ion-android-delete botonBorrarEvento"
+                ng-click="borrarEvento()"></button>
+      </div>
+      <div class="item item-text-wrap">
+        <p>{{e.descripcion}}</p>
+        <strong>{{e.fecha}}</strong>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

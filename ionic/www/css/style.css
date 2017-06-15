@@ -6,6 +6,55 @@
   border: hidden 0px;
 }
 
-.item-divider-azul{
-  background: deepskyblue;
+.item-divider.black{
+  background: #888888;
+  color: white;
+}
+
+.retraso{
+  background-color: yellow;
+  height: 5px;
+  width: 25px;
+  float: left;
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
+.falta{
+  background-color: red;
+  height: 5px;
+  width: 25px;
+  float: left;
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
+.aprobado{
+  float: right;
+  border-radius: 10px;
+  background-color: chartreuse;
+}
+
+.suspenso{
+  float: right;
+  border-radius: 10px;
+  background-color: red;
+}
+
+.botonBorrarEvento{
+  float: right;
+  background: none;
+  border: none;
+}
+.botonBorrarEvento:hover{
+  color: #4d4d4d;
+}
+
+.row{
+  border-bottom: 1px solid black;
+}
+
+.col{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }

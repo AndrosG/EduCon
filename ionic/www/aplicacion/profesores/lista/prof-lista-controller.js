@@ -1,7 +1,7 @@
 angular.module('starter')
   .controller('PasarListaCtrl', controlador);
 
-function controlador($scope) {
+function controlador($scope, $ionicPopup, $ionicLoading) {
   $scope.asignaturas = [
     {
       id: 1,
@@ -36,4 +36,33 @@ function controlador($scope) {
       showAsig: false
     }
   ];
+
+  $scope.enviarFaltas = function (asig) {
+    $ionicPopup.confirm({
+      title: 'Confirmación envío incidencias',
+      template: '¿Estás seguro de que quieres enviar las incidencias?'
+    }).then(function(res) {
+      if(res) {
+        var retrasos = 0;
+        var faltas = 0;
+        for(var i=0; i<asig.alumnos.length; i++){
+          if(asig.alumnos[i].falta){
+            faltas++;
+          }
+          if(asig.alumnos[i].retraso){
+            retrasos++;
+          }
+        }
+        for(var j=0; j<asig.alumnos.length; j++){
+          asig.alumnos[j].falta = false;
+          asig.alumnos[j].retraso = false;
+        }
+        $ionicLoading.show({
+          template: 'Se han enviado las incidencias con éxito',
+          noBackdrop: true,
+          duration: 2000
+        });
+      }
+    });
+  }
 }

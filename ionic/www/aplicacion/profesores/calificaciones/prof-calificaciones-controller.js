@@ -1,7 +1,7 @@
 angular.module('starter')
   .controller('CalificacionesCtrl', controlador);
 
-function controlador($scope) {
+function controlador($scope, $ionicPopup) {
   $scope.asignaturas = [
     {
       id: 1,
@@ -45,4 +45,81 @@ function controlador($scope) {
       showAsig: false
     }
   ];
+
+  $scope.data = {};
+
+  $scope.cambiaNotaFinal = function () {
+    $ionicPopup.show({
+      template: '<input type="number" max="10" min="0" ng-model="data.notaFinal">',
+      title: 'Nota final',
+      subTitle: 'Indique la nota final del alumno',
+      scope: $scope,
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: '<b>Guardar</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            if (!$scope.data.notaFinal) {
+              e.preventDefault();
+            } else {
+              return $scope.data.notaFinal;
+            }
+          }
+        }
+      ]
+    }).then(function(res) {
+      console.log('Tapped!', res);
+    });
+  };
+
+  $scope.editarNota = function (nota) {
+    if(nota){
+      $scope.data = {
+        titulo: nota.titulo,
+        puntuacion: nota.puntuacion,
+        observaciones: nota.observaciones
+      }
+    }
+
+    $ionicPopup.show({
+      template:
+        '<input type="text" placeholder="Título" ng-model="data.titulo"><br>' +
+        '<input type="number" max="10" min="0" ng-model="data.puntuacion" placeholder="Puntuación"><br>' +
+        '<textarea placeholder="Observaciones..." ng-model="data.observaciones">',
+      title: 'Nota',
+      subTitle: 'Introduce los datos correspondientes a la nota',
+      scope: $scope,
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: '<b>Guardar</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            if ($scope.data.titulo && $scope.data.puntuacion && $scope.data.observaciones) {
+              return {
+                titulo: $scope.data.titulo,
+                puntuacion: $scope.data.puntuacion,
+                observaciones: $scope.data.observaciones
+              };
+            } else if($scope.data.titulo && $scope.data.puntuacion) {
+              return {
+                titulo: $scope.data.titulo,
+                puntuacion: $scope.data.puntuacion,
+                observaciones: 'Sin observaciones'
+              };
+            } else {
+              e.preventDefault();
+            }
+          }
+        }
+      ]
+    }).then(function(res) {
+      console.log('Tapped!', res);
+    });
+  }
 }
