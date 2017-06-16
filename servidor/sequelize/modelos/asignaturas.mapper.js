@@ -13,7 +13,8 @@ module.exports = function (sequelize, DataTypes) {
         },
         nombre: {
             type: DataTypes.STRING,
-            field: 'nombre'
+            field: 'nombre',
+            allowNull: false
         }
     }, {
         tableName: 'asignaturas'

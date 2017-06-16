@@ -14,45 +14,38 @@ module.exports = function (sequelize, DataTypes) {
         nombre: {
             type: DataTypes.STRING,
             field: 'nombre',
-            validate: {
-                notNull: true
-            }
+            allowNull: false
         },
         apellidos: {
             type: DataTypes.STRING,
             field: 'apellidos',
-            validate: {
-                notNull: true
-            }
+            allowNull: false
         },
         email: {
             type: DataTypes.STRING,
             field: 'email',
-            validate: {
-                isEmail: true
-            }
+            allowNull: false
         },
         telefono: {
             type: DataTypes.INTEGER,
             field: 'telefono',
-            validate: {
-                notNull: true
-            }
+            allowNull: false
         },
         departamento: {
             type: DataTypes.INTEGER,
             field: 'departamento',
-            validate: {
-                notNull: true
+            references: {
+                model: 'clases',
+                key: 'id'
             }
         },
         usuario: {
             type: DataTypes.STRING,
             field: 'usuario'
         },
-        password: {
+        contra: {
             type: DataTypes.STRING,
-            field: 'password'
+            field: 'contra'
         }
     }, {
         tableName: 'profesores'

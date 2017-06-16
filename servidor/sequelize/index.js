@@ -22,25 +22,20 @@ var sequelize = new Sequelize('educon', 'root', 'educon', {
 
 // carga de modelos
 var modelos = [
-    //'profesores',
-    'alumnos'/*,
+    'profesores',
+    'alumnos',
     'cursos',
     'asignaturas',
-    'notas'*/
+    'notas',
+    'v_alumno',
+    'v_notas_alumno'
 ];
 
 modelos.forEach(function (modelo) {
     module.exports[modelo] = sequelize.import(__dirname + '/modelos/' + [modelo] +'.mapper.js');
-   // module.exports[modelo] = sequelize.import(__dirname + '/servicios/' + [modelo] +'.srv.js');
 });
 
-// descripcion de relaciones entre modelos
-(function (m) {
-    /*m.film_actor.belongsTo(m.actor, {foreignKey: 'actor_id'});
-     m.film_actor.belongsTo(m.film, {foreignKey: 'film_id'});
-     m.actor.hasMany(m.film_actor, {foreignKey: 'actor_id'});
-     m.film.hasMany(m.film_actor, {foreignKey: 'film_id'});*/
-})(module.exports);
+//Las relaciones entre tablas se realizan en los campos de las tablas.
 
 // export connection
 module.exports.sequelize = sequelize;

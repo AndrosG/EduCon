@@ -13,31 +13,35 @@ module.exports = function (sequelize, DataTypes) {
         },
         nombre: {
             type: DataTypes.STRING,
-            field: 'nombre'
+            field: 'nombre',
+            allowNull: false
         },
         apellidos: {
             type: DataTypes.STRING,
-            field: 'apellidos'
+            field: 'apellidos',
+            allowNull: false
         },
         email: {
             type: DataTypes.STRING,
-            field: 'email'
+            field: 'email',
+            allowNull: false
         },
         telefono: {
             type: DataTypes.INTEGER,
-            field: 'telefono'
+            field: 'telefono',
+            allowNull: false
         },
-        curso: {
+        clase: {
             type: DataTypes.INTEGER,
-            field: 'curso',
+            field: 'clase',
             references: {
-                model: 'cursos',
+                model: 'clases',
                 key: 'id',
             }
         },
-        password: {
+        contra: {
             type: DataTypes.STRING,
-            field: 'password'
+            field: 'contra'
         }
     }, {
         tableName: 'alumnos'

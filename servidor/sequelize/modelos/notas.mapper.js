@@ -6,7 +6,13 @@
 
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('notas', {
+        id: {
+            type: DataTypes.INTEGER,
+            field: 'id',
+            primaryKey: true
+        },
         alumno: {
+            field: 'alumno',
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -15,6 +21,7 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         asignatura: {
+            field: 'asignatura',
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -22,10 +29,10 @@ module.exports = function (sequelize, DataTypes) {
                 key: 'id',
             }
         },
-        titulo: {
+        nombre: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: 'titulo'
+            field: 'nombre'
         },
         nota: {
             type: DataTypes.FLOAT,

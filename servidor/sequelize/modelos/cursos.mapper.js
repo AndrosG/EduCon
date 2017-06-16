@@ -13,15 +13,8 @@ module.exports = function (sequelize, DataTypes) {
         },
         nombre: {
             type: DataTypes.STRING,
-            field: 'nombre'
-        },
-        tutor: {
-            type: DataTypes.INTEGER,
-            field: 'tutor',
-            references: {
-                model: 'asignaturas',
-                key: 'id',
-            }
+            field: 'nombre',
+            allowNull: false
         }
     }, {
         tableName: 'cursos'
