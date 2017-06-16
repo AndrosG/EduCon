@@ -43,7 +43,7 @@ angular.module('starter', ['ionic'])
       //------------- PROFESORES --------------------------------------
 
       .state('tab.lista', {
-        url: '/lista',
+        url: '/lista/:id',
         views: {
           'tab-lista': {
             templateUrl: 'aplicacion/profesores/lista/prof-lista.html',
@@ -52,7 +52,7 @@ angular.module('starter', ['ionic'])
         }
       })
       .state('tab.calificaciones', {
-        url: '/calificaciones',
+        url: '/calificaciones/:id',
         views: {
           'tab-calificaciones': {
             templateUrl: 'aplicacion/profesores/calificaciones/prof-calificaciones.html',
@@ -61,7 +61,7 @@ angular.module('starter', ['ionic'])
         }
       })
       .state('tab.perfil', {
-        url: '/perfil',
+        url: '/perfil/:id',
         views: {
           'tab-perfil': {
             templateUrl: 'aplicacion/profesores/perfil/prof-perfil.html',
@@ -70,7 +70,7 @@ angular.module('starter', ['ionic'])
         }
       })
       .state('tab.horario', {
-        url: '/horario',
+        url: '/horario/:id',
         views: {
           'tab-horario': {
             templateUrl: 'aplicacion/profesores/horario/prof-horario.html',
@@ -79,7 +79,7 @@ angular.module('starter', ['ionic'])
         }
       })
       .state('tab.calendario', {
-        url: '/calendario',
+        url: '/calendario/:id',
         views: {
           'tab-calendario': {
             templateUrl: 'aplicacion/profesores/calendario/prof-calendario.html',
@@ -91,12 +91,12 @@ angular.module('starter', ['ionic'])
       //------------- ALUMNOS ------------------------------------------
     $stateProvider
       .state('tab-alu', {
-        url: '/tab-alu',
+        url: '/tab-alu/:id',
         abstract: true,
         templateUrl: 'templates/tabs-alu.html'
       })
       .state('tab-alu.calendario', {
-        url: '/alu-calendario',
+        url: '/alu-calendario/:id',
         views: {
           'tab-alu-calendario': {
             templateUrl: 'aplicacion/alumnos/calendario/alu-calendario.html',
@@ -105,7 +105,7 @@ angular.module('starter', ['ionic'])
         }
       })
       .state('tab-alu.horario', {
-        url: '/alu-horario',
+        url: '/alu-horario/:id',
         views: {
           'tab-alu-horario': {
             templateUrl: 'aplicacion/alumnos/horario/alu-horario.html',
@@ -114,7 +114,7 @@ angular.module('starter', ['ionic'])
         }
       })
       .state('tab-alu.notas', {
-        url: '/alu-notas',
+        url: '/alu-notas/:id',
         views: {
           'tab-alu-notas': {
             templateUrl: 'aplicacion/alumnos/notas/alu-notas.html',
@@ -123,7 +123,7 @@ angular.module('starter', ['ionic'])
         }
       })
       .state('tab-alu.perfil', {
-        url: '/alu-perfil',
+        url: '/alu-perfil/:id',
         views: {
           'tab-alu-perfil': {
             templateUrl: 'aplicacion/alumnos/perfil/alu-perfil.html',

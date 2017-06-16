@@ -19,7 +19,7 @@ function loginCtrl($scope, $state, $http) {
       });
     if(user == 'alu'){
       if(id && pass){
-        $http.post(SERVERURL + '/alumnos', {id: id})
+        $http.post(SERVERURL + '/alumnos', {id: id, contra: pass})
           .then(function (result) {
             console.log(result);
             $state.go('tab-alu.notas');
@@ -32,7 +32,7 @@ function loginCtrl($scope, $state, $http) {
       }
     } else {
       if(id && pass){
-        $http.post(SERVERURL + '/profesores', {id: id})
+        $http.post(SERVERURL + '/profesores', {usuario: id, contra: pass})
           .then(function (result) {
             console.log(result);
             $state.go('tab.lista');
