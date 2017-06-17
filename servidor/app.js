@@ -29,6 +29,9 @@ app.set('modelos', require('./sequelize'));
 
 var modelos = app.get('modelos');
 
+conectaraBD();
+cargarRutas();
+arrancarServicio();
 
 function cargarRutas() {
     app.post('/alumnos', function (req, res, next) {
@@ -46,11 +49,31 @@ function cargarRutas() {
         }
     });
 
-    app.post('/alumnos_clase', function (req, res, next) {
-        if (req.body.id !== undefined) {
-            modelos.v_alumno.findAll({ where: { clase_id: req.body.clase_id } })
+    app.post('/asignaturas_clase', function (req, res, next) {
+        if (req.body.id_clase === undefined) {
+            modelos.asignaturas.findAll({ where: { id_clase: req.body.id_clase }})
                 .then(function (result) {
-                    return res.json(result);
+                    let aux = []
+                    result.forEach(function (item) {
+                        aux.push(item.toJSON());
+                    })
+                    return res.json(aux);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+    });
+
+    app.post('/notas_alumno', function (req, res, next) {
+        if (req.body.id_alumno !== undefined) {
+            modelos.v_notas_alumno.findAll({ where: { id_alumno: req.body.id_alumno} })
+                .then(function (result) {
+                    let aux = []
+                    result.forEach(function (item) {
+                        aux.push(item.toJSON());
+                    })
+                    return res.json(aux);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -73,63 +96,9 @@ function cargarRutas() {
         }
     });
 
-    app.post('/asignaturas', function (req, res, next) {
-        let arr = undefined;
-        if (req.body.id === undefined) {
-            modelos.asignaturas.findAll()
-                .then(function (result) {
-                    let aux = []
-                    result.forEach(function (item) {
-                        aux.push(item.toJSON());
-                    })
-                    arr = aux;
-                    return res.json(arr);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                })
-        } else {
-            modelos.asignaturas.findOne({ where: { id: req.body.id } })
-                .then(function (result) {
-                    arr = result;
-                    return res.json(arr);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                })
-        }
-    });
-
-    app.post('/cursos', function (req, res, next) {
-        let arr = undefined;
-        if (req.body.id === undefined) {
-            modelos.cursos.findAll()
-                .then(function (result) {
-                    let aux = []
-                    result.forEach(function (item) {
-                        aux.push(item.toJSON());
-                    })
-                    arr = aux;
-                    return res.json(arr);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                })
-        } else {
-            modelos.cursos.findOne({ where: { id: req.body.id } })
-                .then(function (result) {
-                    arr = result;
-                    return res.json(arr);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                })
-        }
-    });
-
-    app.post('/notas_alumno', function (req, res, next) {
-        if (req.body.alumno !== undefined) {
-            modelos.v_notas_alumno.findAll()
+    app.post('/clases_profesor', function (req, res, next) {
+        if (req.body.id_profesor === undefined) {
+            modelos.v_clases_profesor.findAll({ where: { id_profesor: req.body.id_profesor } })
                 .then(function (result) {
                     let aux = []
                     result.forEach(function (item) {
@@ -143,15 +112,22 @@ function cargarRutas() {
         }
     });
 
+    app.post('/alumnos_clase', function (req, res, next) {
+        if (req.body.id_clase !== undefined) {
+            modelos.v_alumno.findAll({ where: { clase_id: req.body.id_clase } })
+                .then(function (result) {
+                    return res.json(result);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+    });
+
     app.post('/test', function (req, res, next) {
         return res.json({ message: 'Conexión funciona.' });
     });
-    return 1;
 }
-
-conectaraBD();
-cargarRutas();
-arrancarServicio();
 
 function arrancarServicio() {
     var server = http.createServer(app);
@@ -166,9 +142,7 @@ function conectaraBD() {
         .authenticate()
         .then(function () {
             console.log('Conexión con éxito a la base de datos.');
-            return 1;
         }, function (err) {
             console.log('No se ha podido conectar a la base de datos. Error:', err);
-            return 0;
         });
 }

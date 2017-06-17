@@ -28,7 +28,9 @@ var modelos = [
     'asignaturas',
     'notas',
     'v_alumno',
-    'v_notas_alumno'
+    'v_notas_alumno',
+    'v_asignaturas_clase',
+    'v_clases_profesor'
 ];
 
 modelos.forEach(function (modelo) {
