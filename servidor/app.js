@@ -50,14 +50,10 @@ function cargarRutas() {
     });
 
     app.post('/asignaturas_clase', function (req, res, next) {
-        if (req.body.id_clase === undefined) {
-            modelos.asignaturas.findAll({ where: { id_clase: req.body.id_clase }})
+        if (req.body.id_clase !== undefined) {
+            modelos.v_asignaturas_clase.findAll({ where: { id_clase: req.body.id_clase } })
                 .then(function (result) {
-                    let aux = []
-                    result.forEach(function (item) {
-                        aux.push(item.toJSON());
-                    })
-                    return res.json(aux);
+                    return res.json(result);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -67,7 +63,7 @@ function cargarRutas() {
 
     app.post('/notas_alumno', function (req, res, next) {
         if (req.body.id_alumno !== undefined) {
-            modelos.v_notas_alumno.findAll({ where: { id_alumno: req.body.id_alumno} })
+            modelos.v_notas_alumno.findAll({ where: { id_alumno: req.body.id_alumno } })
                 .then(function (result) {
                     let aux = []
                     result.forEach(function (item) {
@@ -97,7 +93,7 @@ function cargarRutas() {
     });
 
     app.post('/clases_profesor', function (req, res, next) {
-        if (req.body.id_profesor === undefined) {
+        if (req.body.id_profesor !== undefined) {
             modelos.v_clases_profesor.findAll({ where: { id_profesor: req.body.id_profesor } })
                 .then(function (result) {
                     let aux = []
@@ -126,6 +122,37 @@ function cargarRutas() {
 
     app.post('/test', function (req, res, next) {
         return res.json({ message: 'Conexión funciona.' });
+    });
+
+    app.post('/insertar_notas', function (req, res, next) {
+        if (req.body.id_alumno && req.body.nota && req.body.nombre && req.body.observaciones && req.body.id_asignatura) {
+            return sequelize.transaction(function (t) {
+                // chain all your queries here. make sure you return them.
+                return notas.create({
+                    alumno: req.body.id_alumno,
+                    asignatura: req.body.id_asignatura,
+                    nombre: req.body.nombre,
+                    nota: req.body.nota,
+                    observaciones: req.body.observaciones
+                }, { transaction: t }).then(function (notas) {
+                    return notas.setShooter({
+                        alumno: req.body.id_alumno,
+                        asignatura: req.body.id_asignatura,
+                        nombre: req.body.nombre,
+                        nota: req.body.nota,
+                        observaciones: req.body.observaciones
+                    }, { transaction: t });
+                });
+            }).then(function (result) {
+                console.log("Inserción de nota con éxito.");
+                console.log(result);
+                res.json({ message: "Inserción con éxito." });
+            }).catch(function (err) {
+                console.log("Fallo en la inserción. Rollback.");
+                res.json({ message: "Fallo en la inserción. Rollback." });
+            });
+        }
+
     });
 }
 

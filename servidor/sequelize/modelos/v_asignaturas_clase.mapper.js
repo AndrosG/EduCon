@@ -22,6 +22,7 @@ module.exports = function (sequelize, DataTypes) {
         id_asignatura: {
             type: DataTypes.INTEGER,
             field: 'id_asignatura',
+            primaryKey: true
         },
         asignatura: {
             type: DataTypes.STRING,
@@ -35,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             field: 'profesor',
         }
-    }, {
+    },{
             tableName: 'v_asignaturas_clase'
-        })
+    })
 };
