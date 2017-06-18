@@ -57,13 +57,25 @@ function obtenerDatos($http) {
                     })
             }
         },
+
+        insertarNotas: function (id_alumno, id_asignatura, nombre, nota, observaciones) {
+            if (id_alumno !== undefined && id_asignatura !== undefined && nombre !== undefined && nota !== undefined && observaciones !== undefined) {
+                $http.post(SERVERURL + '/insertar_notas'
+                    , {
+                        id_alumno: id_alumno,
+                        id_asignatura: id_asignatura,
+                        nombre: nombre,
+                        nota: nota,
+                        observaciones: observaciones,
+                    })
+                    .then(function (res) {
+                        console.log(res);
+                        return true;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    })
+            }
+        },
     };
-
-
-
-
-
-
-
-
 }

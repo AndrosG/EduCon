@@ -9,6 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         id: {
             type: DataTypes.INTEGER,
             field: 'id',
+            autoIncrement: true,
             primaryKey: true
         },
         alumno: {

@@ -126,33 +126,25 @@ function cargarRutas() {
 
     app.post('/insertar_notas', function (req, res, next) {
         if (req.body.id_alumno && req.body.nota && req.body.nombre && req.body.observaciones && req.body.id_asignatura) {
-            return sequelize.transaction(function (t) {
+            return modelos.sequelize.transaction(function (t) {
                 // chain all your queries here. make sure you return them.
-                return notas.create({
+                return modelos.notas.create({
                     alumno: req.body.id_alumno,
                     asignatura: req.body.id_asignatura,
                     nombre: req.body.nombre,
                     nota: req.body.nota,
                     observaciones: req.body.observaciones
-                }, { transaction: t }).then(function (notas) {
-                    return notas.setShooter({
-                        alumno: req.body.id_alumno,
-                        asignatura: req.body.id_asignatura,
-                        nombre: req.body.nombre,
-                        nota: req.body.nota,
-                        observaciones: req.body.observaciones
-                    }, { transaction: t });
-                });
-            }).then(function (result) {
-                console.log("Inserción de nota con éxito.");
-                console.log(result);
-                res.json({ message: "Inserción con éxito." });
-            }).catch(function (err) {
-                console.log("Fallo en la inserción. Rollback.");
-                res.json({ message: "Fallo en la inserción. Rollback." });
-            });
+                }, { transaction: t })
+                    .then(function (result) {
+                        console.log("Inserción de nota con éxito.");
+                        console.log(result);
+                        res.json({ message: "Inserción con éxito." });
+                    }).catch(function (err) {
+                        console.log("Fallo en la inserción. Rollback.");
+                        res.json({ message: "Fallo en la inserción. Rollback." });
+                    });
+            })
         }
-
     });
 }
 
