@@ -5,7 +5,7 @@ function obtenerDatos($http) {
   var SERVERURL = 'http://80.49.113.168:9095';
 
   return {
-    data: {},
+    user: {},
     getAsignaturasClase: function (id_clase) {
         if (id_clase !== undefined) {
             $http.post(SERVERURL + '/asignaturas_clase', { id_clase: id_clase })
