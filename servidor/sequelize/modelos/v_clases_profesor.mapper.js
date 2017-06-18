@@ -21,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         grupo: {
             type: DataTypes.STRING,
-            field: 'nombre'
+            field: 'grupo'
         }
     }, {
         tableName: 'v_clases_profesor'

@@ -110,7 +110,7 @@ function cargarRutas() {
 
     app.post('/alumnos_clase', function (req, res, next) {
         if (req.body.id_clase !== undefined) {
-            modelos.v_alumno.findAll({ where: { clase_id: req.body.id_clase } })
+            modelos.v_alumno.findAll({ where: { id_clase: req.body.id_clase } })
                 .then(function (result) {
                     return res.json(result);
                 })
