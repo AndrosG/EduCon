@@ -1,7 +1,15 @@
 angular.module('starter')
   .controller('PasarListaCtrl', controlador);
 
-function controlador($scope, $ionicPopup, $ionicLoading) {
+function controlador($scope, $ionicPopup, $ionicLoading, ObtenerDatosSrv) {
+  $scope.asignaturasClase = ObtenerDatosSrv.getAsignaturasClase;
+  $scope.notasAlumno = ObtenerDatosSrv.getNotasAlumno;
+  $scope.clasesProfesor = ObtenerDatosSrv.getClasesProfesor;
+  console.log(ObtenerDatosSrv.user.data);
+  console.log(ObtenerDatosSrv.getAsignaturasClase);
+  console.log(ObtenerDatosSrv.getNotasAlumno);
+  console.log(ObtenerDatosSrv.getClasesProfesor);
+
   $scope.asignaturas = [
     {
       id: 1,

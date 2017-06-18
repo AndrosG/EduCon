@@ -1,7 +1,7 @@
 angular.module('starter')
   .controller('LoginCtrl', loginCtrl);
 
-function loginCtrl($scope, $state, $http) {
+function loginCtrl($scope, $state, $http, ObtenerDatosSrv) {
   var SERVERURL = 'http://80.49.113.168:9095';
 
   $scope.variables = {
@@ -22,6 +22,7 @@ function loginCtrl($scope, $state, $http) {
         $http.post(SERVERURL + '/alumnos', {id: id, contra: pass})
           .then(function (result) {
             console.log(result);
+            ObtenerDatosSrv.user.data = result.data;
             $state.go('tab-alu.notas');
           })
           .catch(function (err) {
@@ -35,6 +36,7 @@ function loginCtrl($scope, $state, $http) {
         $http.post(SERVERURL + '/profesores', {usuario: id, contra: pass})
           .then(function (result) {
             console.log(result);
+            ObtenerDatosSrv.user.data = result.data;
             $state.go('tab.lista');
           })
           .catch(function (err) {
