@@ -1,7 +1,9 @@
 angular.module('starter')
   .controller('AluPerfilCtrl', controlador);
 
-function controlador($scope, $ionicPopup, $state) {
+function controlador($scope, $ionicPopup, $state, ObtenerDatosSrv) {
+  $scope.user = ObtenerDatosSrv.user.data;
+
   $scope.cerrarSesion = function () {
     $ionicPopup.confirm({
       title: 'Cerrar sesión',
@@ -9,6 +11,7 @@ function controlador($scope, $ionicPopup, $state) {
       cancelText: 'Cancelar'
     }).then(function(res) {
       if(res) {
+        ObtenerDatosSrv.user = {};
         $state.go('login');
       }
     });

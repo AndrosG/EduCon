@@ -8,15 +8,15 @@
       <div class="list">
         <h3>Datos personales</h3>
         <div class="item item-divider">Nombre</div>
-        <div class="item">Perico</div>
+        <div class="item">{{user.nombre}}</div>
         <div class="item item-divider">Apellidos</div>
-        <div class="item">De los palotes</div>
+        <div class="item">{{user.apellidos}}</div>
         <div class="item item-divider">Nº teléfono</div>
-        <div class="item">655987458</div>
+        <div class="item">{{user.telefono}}</div>
         <div class="item item-divider">Email</div>
-        <div class="item">fdsabi@gmail.com</div>
+        <div class="item">{{user.email}}</div>
         <div class="item item-divider">Usuario</div>
-        <div class="item">profesor45</div>
+        <div class="item">{{user.usuario}}</div>
         <h3>Datos de usuario</h3>
         <label class="item item-input">
           <input type="password" placeholder="Contraseña actual*" required ng-model="passActual"/>

@@ -11,8 +11,8 @@ function obtenerDatos($http) {
             if (id_clase !== undefined) {
                 $http.post(SERVERURL + '/asignaturas_clase', { id_clase: id_clase })
                     .then(function (res) {
-                        user.asignaturas_clase = res;
-                        return res;
+                        user.asignaturas_clase = res.data;
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -23,8 +23,8 @@ function obtenerDatos($http) {
             if (id_profesor !== undefined) {
                 $http.post(SERVERURL + '/asignaturas_profesor', { id_profesor: id_profesor })
                     .then(function (res) {
-                        user.asignaturas_profesor = res;
-                        return res;
+                        user.asignaturas_profesor = res.data;
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -35,8 +35,8 @@ function obtenerDatos($http) {
             if (id_clase !== undefined) {
                 $http.post(SERVERURL + '/horario_clase', { id_clase: id_clase })
                     .then(function (res) {
-                        user.horario_clase = res;
-                        return res;
+                        user.horario_clase = res.data;
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -47,8 +47,8 @@ function obtenerDatos($http) {
             if (id_alumno !== undefined) {
                 $http.post(SERVERURL + '/notas_alumno', { id_alumno: id_alumno })
                     .then(function (res) {
-                        user.notas_alumno = res;
-                        return res;
+                        user.notas_alumno = res.data;
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -59,8 +59,8 @@ function obtenerDatos($http) {
             if (id_alumno !== undefined) {
                 $http.post(SERVERURL + '/eventos_alumno', { id_alumno: id_alumno })
                     .then(function (res) {
-                        user.eventos_alumno = res;
-                        return res;
+                        user.eventos_alumno = res.data;
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -71,8 +71,8 @@ function obtenerDatos($http) {
             if (id_profesor !== undefined) {
                 $http.post(SERVERURL + '/clases_profesor', { id_profesor: id_profesor })
                     .then(function (res) {
-                        user.clases_profesor = res;
-                        return res;
+                        user.clases_profesor = res.data;
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -85,8 +85,8 @@ function obtenerDatos($http) {
             if (id_clase !== undefined) {
                 $http.post(SERVERURL + '/alumnos_clase', { id_clase: id_clase })
                     .then(function (res) {
-                        user.alumnos_clase/*[contador]*/ = res;
-                        return res;
+                        user.alumnos_clase/*[contador]*/ = res.data;
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
@@ -103,11 +103,11 @@ function obtenerDatos($http) {
                         id_asignatura: id_asignatura,
                         nombre: nombre,
                         nota: nota,
-                        observaciones: observaciones,
+                        observaciones: observaciones
                     })
                     .then(function (res) {
-                        console.log(res);
-                        return res;
+                        console.log(res.data);
+                        return res.data;
                     })
                     .catch(function (err) {
                         console.log(err);
