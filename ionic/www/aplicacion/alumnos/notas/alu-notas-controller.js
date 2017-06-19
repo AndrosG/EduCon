@@ -1,8 +1,31 @@
 angular.module('starter')
   .controller('AluNotasCtrl', controlador);
 
-function controlador($scope) {
-  $scope.alumno = {
+function controlador($scope, ObtenerDatosSrv, $http) {
+  var SERVERURL = 'http://80.49.113.168:9095';
+  $scope.asignaturas = [];
+  $scope.notas = [];
+
+  $http.post(SERVERURL + '/asignaturas_clase', { id_clase: ObtenerDatosSrv.user.data.id_clase })
+    .then(function (res) {
+      $scope.asignaturas = res.data;
+      for(var i=0; i<$scope.asignaturas.length; i++){
+        $scope.asignaturas[i].showAsig = false;
+      }
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+
+  $http.post(SERVERURL + '/notas_alumno', { id_alumno: ObtenerDatosSrv.user.data.id })
+    .then(function (res) {
+      $scope.notas = res.data;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+
+  /*$scope.alumno = {
     nombre: 'Daniel',
     apellidos: 'Carmona',
     asignaturas: [
@@ -25,5 +48,5 @@ function controlador($scope) {
       ]},
       {id:6, nombre:'Sistemas informáticos', curso:'2º DAM', showAsig:false, notaFinal: 9},
     ]
-  };
+  };*/
 }

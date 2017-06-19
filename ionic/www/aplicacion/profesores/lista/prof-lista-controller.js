@@ -4,29 +4,30 @@
 function controlador($scope, $ionicPopup, $ionicLoading, ObtenerDatosSrv, $http) {
   var SERVERURL = 'http://80.49.113.168:9095';
 
+  $scope.alumnos = [];
   $scope.asignaturas_profesor = [];
 
-  $http.post(SERVERURL + '/asignaturas_profesor', { id_profesor: ObtenerDatosSrv.user.data.id })
+  $http.post(SERVERURL + '/asignaturas_profesor', {id_profesor: ObtenerDatosSrv.user.data.id})
     .then(function (res) {
-      var i;
       $scope.asignaturas_profesor = res.data;
-      /*for(i=0; i<$scope.asignaturas_profesor.length; i++) {
+      for (var i = 0; i < $scope.asignaturas_profesor.length; i++) {
+        $scope.asignaturas_profesor[i].showAsig = false;
         $http.post(SERVERURL + '/alumnos_clase', {id_clase: $scope.asignaturas_profesor[i].id_clase})
           .then(function (res) {
-            if(i < $scope.asignaturas_profesor.length) {
-              $scope.asignaturas_profesor[i].alumnos = res.data;
+            for(var j=0; j<res.data.length; j++){
+              $scope.alumnos.push(res.data[j]);
             }
           })
           .catch(function (err) {
             console.log(err);
           })
-      }*/
+      }
     })
     .catch(function (err) {
       console.log(err);
     });
 
-  $scope.asignaturas = [
+  /*$scope.asignaturas = [
     {
       id: 1,
       nombre: 'Matemáticas',
@@ -59,7 +60,7 @@ function controlador($scope, $ionicPopup, $ionicLoading, ObtenerDatosSrv, $http)
       ],
       showAsig: false
     }
-  ];
+  ];*/
 
   $scope.enviarFaltas = function (asig) {
     $ionicPopup.confirm({
@@ -67,26 +68,41 @@ function controlador($scope, $ionicPopup, $ionicLoading, ObtenerDatosSrv, $http)
       template: '¿Estás seguro de que quieres enviar las incidencias?'
     }).then(function (res) {
       if (res) {
-        var retrasos = 0;
-        var faltas = 0;
-        for (var i = 0; i < asig.alumnos.length; i++) {
-          if (asig.alumnos[i].falta) {
-            faltas++;
+        for(var i=0; i<$scope.alumnos.length; i++){
+          if ($scope.alumnos[i].falta){
+            console.log(new Date().toLocaleString());
+            ponerIncidencia($scope.alumnos[i].id, ObtenerDatosSrv.user.data.id, new Date(), 'FALTA', '');
+            $scope.alumnos[i].falta = false;
           }
-          if (asig.alumnos[i].retraso) {
-            retrasos++;
+          if ($scope.alumnos[i].retraso){
+            ponerIncidencia($scope.alumnos[i].id, ObtenerDatosSrv.user.data.id, new Date(), 'RETRASO', '');
+            $scope.alumnos[i].retraso = false;
           }
         }
-        for (var j = 0; j < asig.alumnos.length; j++) {
-          asig.alumnos[j].falta = false;
-          asig.alumnos[j].retraso = false;
-        }
+      }
+    });
+  };
+
+  function ponerIncidencia(id_alumno, id_profesor, sesion, tipo, descripcion) {
+    $http.post(SERVERURL + '/insertar_evento'
+      , {
+        id_alumno: id_alumno,
+        id_profesor: id_profesor,
+        sesion: sesion,
+        tipo: tipo,
+        descripcion: descripcion
+      })
+      .then(function (res) {
         $ionicLoading.show({
           template: 'Se han enviado las incidencias con éxito',
           noBackdrop: true,
           duration: 2000
         });
-      }
-    });
+        console.log(res);
+        return res;
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
 }

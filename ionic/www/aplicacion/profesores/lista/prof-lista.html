@@ -8,13 +8,13 @@
       <div><div class="falta"></div> Falta de asistencia</div>
     </div>
     <div class="list">
-      <div class="card" ng-repeat="asig in asignaturas">
+      <div class="card" ng-repeat="asig in asignaturas_profesor">
         <div class="item item-divider" ng-click="asig.showAsig = !asig.showAsig">
-          {{asig.curso}} - {{asig.nombre}}
+          {{asig.asignatura}}
         </div>
         <div class="item item-text-wrap" ng-if="asig.showAsig">
           <div class="list">
-            <div class="item" ng-repeat="alum in asig.alumnos | orderBy:'nombre'">
+            <div class="item" ng-repeat="alum in alumnos | orderBy:'nombre'" ng-if="alum.id_clase == asig.id_clase">
               {{alum.nombre}} {{alum.apellidos}}
               <div style="float: right;">
                 <ion-checkbox style="float: right;"
@@ -27,20 +27,6 @@
             </div>
           </div>
           <button class="button button-block button-positive" ng-click="enviarFaltas(asig)">ENVIAR</button>
-        </div>
-      </div>
-    </div>
-    <div class="list">
-      <div class="card" ng-repeat="clas in asignaturas_profesor">
-        <div class="item item-divider">
-          {{clas.asignatura}}
-        </div>
-        <div class="item item-text-wrap">
-          <div class="list">
-            <div class="item" ng-repeat="alum in clas.alumnos | orderBy:'nombre'">
-              {{alum.nombre}} {{alum.apellidos}}
-            </div>
-          </div>
         </div>
       </div>
     </div>

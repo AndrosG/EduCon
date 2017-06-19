@@ -28,7 +28,7 @@
           <input type="password" placeholder="Confirmar nueva contraseña*" required ng-model="passAComprobar"/>
         </label>
       </div>
-      <button class="button button-block button-positive">CAMBIAR CONTRASEÑA</button>
+      <button class="button button-block button-positive" ng-click="cambiaPass(passActual, passNueva, passAComprobar)">CAMBIAR CONTRASEÑA</button>
     </form>
   </ion-content>
 </ion-view>

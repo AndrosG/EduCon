@@ -4,16 +4,16 @@
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
-      <div class="card" ng-repeat="asig in alumno.asignaturas">
+      <div class="card" ng-repeat="asig in asignaturas">
         <div class="item item-divider" ng-click="asig.showAsig = !asig.showAsig">
-          {{asig.curso}} - {{asig.nombre}}
+          {{asig.asignatura}}
           <span style="float: right;">{{asig.notaFinal}}</span>
         </div>
-        <div class="item item-text-wrap" ng-if="asig.showAsig && asig.notas">
+        <div class="item item-text-wrap" ng-if="asig.showAsig">
           <div class="list">
-            <div class="card" ng-repeat="nota in asig.notas" style="margin-top: 5px; margin-bottom: 5px;">
+            <div class="card" ng-repeat="nota in notas" ng-if="asig.asignatura == nota.asignatura" style="margin-top: 5px; margin-bottom: 5px;">
               <div class="item item-divider" style="padding-bottom: 15px;">
-                {{nota.titulo}}
+                {{nota.nombre}}
               </div>
               <div class="item item-text-wrap">
                 {{nota.nota}} - {{nota.observaciones}}
