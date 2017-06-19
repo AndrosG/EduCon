@@ -19,6 +19,18 @@ function obtenerDatos($http) {
                     })
             }
         },
+        getAsignaturasProfesor: function (id_profesor) {
+            if (id_profesor !== undefined) {
+                $http.post(SERVERURL + '/asignaturas_profesor', { id_profesor: id_profesor })
+                    .then(function (res) {
+                        user.asignaturas_profesor = res;
+                        return res;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    })
+            }
+        },
         getHorarioClase: function (id_clase) {
             if (id_clase !== undefined) {
                 $http.post(SERVERURL + '/horario_clase', { id_clase: id_clase })
@@ -121,5 +133,22 @@ function obtenerDatos($http) {
                         })
             }
         },
+        /**
+        *   cambiarContrasena
+        *
+        *   codigo: 0 para alumno, 1 para profesor. Indica la tabla a la que afectará esta función.
+        *
+        */
+        cambiarContrasena: function (codigo, id, contra, nuevaContra) {
+            if (codigo !== undefined && id !== undefined && nuevaContra !== undefined) {
+                $http.post(SERVERURL + '/cambiarContrasena', { codigo: codigo, id: id, contra: contra, nuevaContra: nuevaContra })
+                    .then(function (res) {
+                        return res;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    })
+            }
+        }
     };
 }

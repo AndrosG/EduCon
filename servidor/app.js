@@ -61,6 +61,18 @@ function cargarRutas() {
         }
     });
 
+    app.post('/asignaturas_profesor', function (req, res, next) {
+        if (req.body.id_profesor !== undefined) {
+            modelos.v_asignaturas_clase.findAll({ where: { id_profesor: req.body.id_profesor } })
+                .then(function (result) {
+                    return res.json(result);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+    });
+
     app.post('/horario_clase', function (req, res, next) {
         if (req.body.id_clase !== undefined) {
             modelos.v_horario_clase.findAll({ where: { id_clase: req.body.id_clase } })
@@ -182,6 +194,43 @@ function cargarRutas() {
                         res.json({ message: "Fallo en la inserción. Rollback." });
                     });
             })
+        }
+    });
+
+    app.post('/cambiarContrasena', function (req, res, next) {
+        if (req.body.codigo && req.body.id && req.body.contra && req.body.nuevaContra) {
+            if (req.body.codigo = 0) {
+                modelos.alumnos.findOne({ where: { id: req.body.id } })
+                    .then(function (result) {
+                        if (result.contra === req.body.contra) {
+                            return modelos.alumnos.update({
+                                contra: req.body.nuevaContra
+                            }, { where: { id: req.body.id } }
+                            ).then(function (result) {
+                                res.json('Modificación exitosa.');
+                            })
+                        }
+                    }).catch(function (err) {
+                        console.log(err);
+                        res.json({ message: "Fallo." });
+                    })
+            }
+            if (req.body.codigo = 1) {
+                modelos.profesores.findOne({ where: { id: req.body.id } })
+                    .then(function (result) {
+                        if (result.contra === req.body.contra) {
+                            return modelos.profesores.update({
+                                contra: req.body.nuevaContra
+                            }, { where: { id: req.body.id } }
+                            ).then(function (result) {
+                                res.json('Modificación exitosa.');
+                            })
+                        }
+                    }).catch(function (err) {
+                        console.log(err);
+                        res.json({ message: "Fallo." });
+                    })
+            }
         }
     });
 }
