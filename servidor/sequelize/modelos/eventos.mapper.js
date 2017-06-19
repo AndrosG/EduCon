@@ -43,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
             field: 'descripcion'
         },
         visible: {
-            type: DataTypes.TINYINT,
+            type: DataTypes.INTEGER,
             field: 'visible',
             defaultValue: 1
         }

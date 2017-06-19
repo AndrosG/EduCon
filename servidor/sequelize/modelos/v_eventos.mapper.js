@@ -37,7 +37,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         id_profesor: {
             type: DataTypes.INTEGER,
-            field: 'id_profesor'
+            field: 'id_prof'
         },
         nombre_prof: {
             type: DataTypes.STRING,
@@ -52,7 +52,7 @@ module.exports = function (sequelize, DataTypes) {
             field: 'descripcion'
         },
         visible: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             field: 'visible'
         }
     }, {

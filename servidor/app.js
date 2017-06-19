@@ -205,7 +205,7 @@ function cargarRutas() {
                 contra: req.body.nuevaContra
             }, { where: { id: req.body.id } }
             ).then(function (result) {
-                res.json('Modificación exitosa.');
+                res.json({ message: 'Modificación exitosa.' });
             }).catch(function (err) {
                 console.log(err);
                 res.json({ message: "Fallo." });
@@ -214,7 +214,7 @@ function cargarRutas() {
     });
 
     app.post('/cambiarContrasena', function (req, res, next) {
-        if (req.body.codigo && req.body.id && req.body.contra && req.body.nuevaContra) {
+        if (req.body.codigo !== undefined && req.body.id !== undefined && req.body.contra !== undefined && req.body.nuevaContra !== undefined) {
             if (req.body.codigo === 0) {
                 modelos.alumnos.findOne({ where: { id: req.body.id } })
                     .then(function (result) {
@@ -223,7 +223,7 @@ function cargarRutas() {
                                 contra: req.body.nuevaContra
                             }, { where: { id: req.body.id } }
                             ).then(function (result) {
-                                res.json('Modificación exitosa.');
+                                res.json({ message: 'Modificación exitosa.' });
                             });
                         }
                     }).catch(function (err) {
@@ -239,7 +239,7 @@ function cargarRutas() {
                                 contra: req.body.nuevaContra
                             }, { where: { id: req.body.id } }
                             ).then(function (result) {
-                                res.json('Modificación exitosa.');
+                                res.json({ message: 'Modificación exitosa.' });
                             });
                         }
                     }).catch(function (err) {
