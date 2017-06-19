@@ -16,7 +16,7 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
         getAsignaturasProfesor: function (id_profesor) {
@@ -28,7 +28,7 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
         getHorarioClase: function (id_clase) {
@@ -40,7 +40,7 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
         getNotasAlumno: function (id_alumno) {
@@ -52,7 +52,7 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
         getEventosAlumno: function (id_alumno) {
@@ -64,7 +64,7 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
         getClasesProfesor: function (id_profesor) {
@@ -76,7 +76,7 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
 
@@ -90,7 +90,7 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
 
@@ -111,29 +111,30 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
-                    })
+                    });
             }
         },
 
-        insertarEvento: function (id_alumno, sesion, tipo, descripcion) {
-            if (id_alumno !== undefined && sesion !== undefined && tipo !== undefined) {
-                    $http.post(SERVERURL + '/insertar_evento'
-                        , {
-                            id_alumno: id_alumno,
-                            sesion: sesion,
-                            tipo: tipo,
-                            descripcion: descripcion
-                        })
-                        .then(function (res) {
-                            console.log(res);
-                            return res;
-                        })
-                        .catch(function (err) {
-                            console.log(err);
-                        })
+        insertarEvento: function (id_alumno, id_profesor, sesion, tipo, descripcion) {
+            if ((id_alumno !== undefined || id_profesor !== undefined) && sesion !== undefined && tipo !== undefined) {
+                $http.post(SERVERURL + '/insertar_evento'
+                    , {
+                        id_alumno: id_alumno,
+                        id_profesor: id_profesor,
+                        sesion: sesion,
+                        tipo: tipo,
+                        descripcion: descripcion
+                    })
+                    .then(function (res) {
+                        console.log(res);
+                        return res;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
             }
         },
-        /**
+        /*
         *   cambiarContrasena
         *
         *   codigo: 0 para alumno, 1 para profesor. Indica la tabla a la que afectará esta función.
@@ -147,7 +148,25 @@ function obtenerDatos($http) {
                     })
                     .catch(function (err) {
                         console.log(err);
+                    });
+            }
+        },
+
+        /*
+        *   cambiarEvento
+        *
+        *   visible: 0 para ocultar, 1 para mostrar. Indica si el evento afectado se podrá mostrar o no.
+        *
+        */
+        cambiarEvento: function (id_evento, visible) {
+            if (id_evento !== undefined && visible !== undefined) {
+                $http.post(SERVERURL + '/cambiarEvento', { id_evento: id_evento, visible: visible })
+                    .then(function (res) {
+                        return res;
                     })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
             }
         }
     };

@@ -13,33 +13,49 @@ module.exports = function (sequelize, DataTypes) {
         },
         fecha: {
             type: DataTypes.DATE,
-            field: 'fecha',
+            field: 'fecha'
         },
         hora: {
             type: DataTypes.STRING,
-            field: 'fecha',
+            field: 'fecha'
         },
         tipo: {
             type: DataTypes.STRING,
-            field: 'tipo',
+            field: 'tipo'
         },
         id_alumno: {
             type: DataTypes.INTEGER,
-            field: 'id_alumno',
+            field: 'id_alumno'
         },
         nombre_alu: {
             type: DataTypes.STRING,
-            field: 'nombre_alu',
+            field: 'nombre_alu'
         },
         apellidos_alu: {
             type: DataTypes.STRING,
-            field: 'apellidos_alu',
+            field: 'apellidos_alu'
+        },
+        id_profesor: {
+            type: DataTypes.INTEGER,
+            field: 'id_profesor'
+        },
+        nombre_prof: {
+            type: DataTypes.STRING,
+            field: 'nombre_prof'
+        },
+        apellidos_prof: {
+            type: DataTypes.STRING,
+            field: 'apellidos_prof'
         },
         descripcion: {
             type: DataTypes.STRING,
             field: 'descripcion'
+        },
+        visible: {
+            type: DataTypes.BOOLEAN,
+            field: 'visible'
         }
     }, {
-        tableName: 'v_eventos'
-    })
+            tableName: 'v_eventos'
+        });
 };

@@ -4,7 +4,7 @@
 
 'use strict';
 
-module.exports = function (sequelize, DataTypes, Sequelize) {
+module.exports = function (sequelize, DataTypes) {
     var Sequelize = require('sequelize');
 
     return sequelize.define('eventos', {
@@ -17,7 +17,12 @@ module.exports = function (sequelize, DataTypes, Sequelize) {
         alumno: {
             type: DataTypes.INTEGER,
             field: 'alumno',
-            allowNull: false
+            defaultValue: null
+        },
+        profesor: {
+            type: DataTypes.INTEGER,
+            field: 'profesor',
+            defaultValue: null
         },
         fecha: {
             type: DataTypes.DATE,
@@ -36,6 +41,11 @@ module.exports = function (sequelize, DataTypes, Sequelize) {
         descripcion: {
             type: DataTypes.STRING,
             field: 'descripcion'
+        },
+        visible: {
+            type: DataTypes.TINYINT,
+            field: 'visible',
+            defaultValue: 1
         }
     }, {
         tableName: 'eventos'

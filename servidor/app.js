@@ -45,7 +45,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -57,7 +57,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -69,7 +69,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -81,7 +81,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -93,7 +93,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -108,7 +108,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -120,7 +120,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -132,7 +132,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -144,7 +144,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
-                })
+                });
         }
     });
 
@@ -171,20 +171,22 @@ function cargarRutas() {
                         console.log("Fallo en la inserción. Rollback.");
                         res.json({ message: "Fallo en la inserción. Rollback." });
                     });
-            })
+            });
         }
     });
 
     app.post('/insertar_evento', function (req, res, next) {
-        if (req.body.id_alumno && req.body.sesion && req.body.tipo) {
+        if ((req.body.id_alumno || req.body.id_profesor) && req.body.sesion && req.body.tipo) {
             console.log(req.body);
             return modelos.sequelize.transaction(function (t) {
                 // chain all your queries here. make sure you return them.
                 return modelos.eventos.create({
                     alumno: req.body.id_alumno,
+                    profesor: req.body.id_profesor,
                     sesion: req.body.sesion,
                     tipo: req.body.tipo,
-                    descripcion: req.body.descripcion
+                    descripcion: req.body.descripcion,
+                    visible: req.body.visible
                 }, { transaction: t })
                     .then(function (result) {
                         console.log(result);
@@ -193,13 +195,27 @@ function cargarRutas() {
                         console.log(err);
                         res.json({ message: "Fallo en la inserción. Rollback." });
                     });
-            })
+            });
+        }
+    });
+
+    app.post('/cambiarEvento', function (req, res, next) {
+        if (req.body.id_evento && req.body.visible) {
+            return modelos.alumnos.update({
+                contra: req.body.nuevaContra
+            }, { where: { id: req.body.id } }
+            ).then(function (result) {
+                res.json('Modificación exitosa.');
+            }).catch(function (err) {
+                console.log(err);
+                res.json({ message: "Fallo." });
+            });     
         }
     });
 
     app.post('/cambiarContrasena', function (req, res, next) {
         if (req.body.codigo && req.body.id && req.body.contra && req.body.nuevaContra) {
-            if (req.body.codigo = 0) {
+            if (req.body.codigo === 0) {
                 modelos.alumnos.findOne({ where: { id: req.body.id } })
                     .then(function (result) {
                         if (result.contra === req.body.contra) {
@@ -208,14 +224,14 @@ function cargarRutas() {
                             }, { where: { id: req.body.id } }
                             ).then(function (result) {
                                 res.json('Modificación exitosa.');
-                            })
+                            });
                         }
                     }).catch(function (err) {
                         console.log(err);
                         res.json({ message: "Fallo." });
-                    })
+                    });
             }
-            if (req.body.codigo = 1) {
+            if (req.body.codigo === 1) {
                 modelos.profesores.findOne({ where: { id: req.body.id } })
                     .then(function (result) {
                         if (result.contra === req.body.contra) {
@@ -224,12 +240,12 @@ function cargarRutas() {
                             }, { where: { id: req.body.id } }
                             ).then(function (result) {
                                 res.json('Modificación exitosa.');
-                            })
+                            });
                         }
                     }).catch(function (err) {
                         console.log(err);
                         res.json({ message: "Fallo." });
-                    })
+                    });
             }
         }
     });
