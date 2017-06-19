@@ -13,7 +13,7 @@ var sequelize = new Sequelize('educon', 'root', 'educon', {
     },
     pool: {
         max: 10,
-        min: 0,
+        min: 5,
         idle: 10000
     },
     // SQLite only
@@ -22,15 +22,18 @@ var sequelize = new Sequelize('educon', 'root', 'educon', {
 
 // carga de modelos
 var modelos = [
-    'profesores',
     'alumnos',
-    'cursos',
     'asignaturas',
+    'cursos',
+    'eventos',
     'notas',
+    'profesores',
     'v_alumno',
-    'v_notas_alumno',
     'v_asignaturas_clase',
-    'v_clases_profesor'
+    'v_clases_profesor',
+    'v_eventos',
+    'v_horario_clase',
+    'v_notas_alumno'
 ];
 
 modelos.forEach(function (modelo) {

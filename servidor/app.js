@@ -61,15 +61,23 @@ function cargarRutas() {
         }
     });
 
+    app.post('/horario_clase', function (req, res, next) {
+        if (req.body.id_clase !== undefined) {
+            modelos.v_horario_clase.findAll({ where: { id_clase: req.body.id_clase } })
+                .then(function (result) {
+                    return res.json(result);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+    });
+
     app.post('/notas_alumno', function (req, res, next) {
         if (req.body.id_alumno !== undefined) {
             modelos.v_notas_alumno.findAll({ where: { id_alumno: req.body.id_alumno } })
                 .then(function (result) {
-                    let aux = []
-                    result.forEach(function (item) {
-                        aux.push(item.toJSON());
-                    })
-                    return res.json(aux);
+                    return res.json(result);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -96,11 +104,7 @@ function cargarRutas() {
         if (req.body.id_profesor !== undefined) {
             modelos.v_clases_profesor.findAll({ where: { id_profesor: req.body.id_profesor } })
                 .then(function (result) {
-                    let aux = []
-                    result.forEach(function (item) {
-                        aux.push(item.toJSON());
-                    })
-                    return res.json(aux);
+                    return res.json(result);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -120,11 +124,23 @@ function cargarRutas() {
         }
     });
 
+    app.post('/eventos_alumno', function (req, res, next) {
+        if (req.body.id_alumno !== undefined) {
+            modelos.v_eventos.findAll({ where: { id_alumno: req.body.id_alumno } })
+                .then(function (result) {
+                    return res.json(result);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+    });
+
     app.post('/test', function (req, res, next) {
         return res.json({ message: 'Conexión funciona.' });
     });
 
-    app.post('/insertar_notas', function (req, res, next) {
+    app.post('/insertar_nota', function (req, res, next) {
         if (req.body.id_alumno && req.body.nota && req.body.nombre && req.body.observaciones && req.body.id_asignatura) {
             return modelos.sequelize.transaction(function (t) {
                 // chain all your queries here. make sure you return them.
@@ -141,6 +157,28 @@ function cargarRutas() {
                         res.json({ message: "Inserción con éxito." });
                     }).catch(function (err) {
                         console.log("Fallo en la inserción. Rollback.");
+                        res.json({ message: "Fallo en la inserción. Rollback." });
+                    });
+            })
+        }
+    });
+
+    app.post('/insertar_evento', function (req, res, next) {
+        if (req.body.id_alumno && req.body.sesion && req.body.tipo) {
+            console.log(req.body);
+            return modelos.sequelize.transaction(function (t) {
+                // chain all your queries here. make sure you return them.
+                return modelos.eventos.create({
+                    alumno: req.body.id_alumno,
+                    sesion: req.body.sesion,
+                    tipo: req.body.tipo,
+                    descripcion: req.body.descripcion
+                }, { transaction: t })
+                    .then(function (result) {
+                        console.log(result);
+                        res.json({ message: "Inserción con éxito." });
+                    }).catch(function (err) {
+                        console.log(err);
                         res.json({ message: "Fallo en la inserción. Rollback." });
                     });
             })
