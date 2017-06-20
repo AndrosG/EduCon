@@ -234,9 +234,10 @@ function cargarRutas() {
 
     app.post('/cambiarNota', function (req, res, next) {
         console.log(req.body);
-        if (req.body.nota.id_nota !== undefined && req.body.nota.id_asignatura !== undefined
+        if (req.body.nota.id_nota !== undefined && req.body.nota.id_asignatura !== undefined && req.body.nota.id_alumno !== undefined
             && req.body.nota.nombre !== undefined && req.body.nota.nota !== undefined) {
             return modelos.notas.update({
+                id_alumno: req.body.id_alumno,
                 id_asignatura: req.body.nota.id_asignatura,
                 nombre: req.body.nota.nombre,
                 nota: req.body.nota.nota,
