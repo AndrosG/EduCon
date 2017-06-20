@@ -45,6 +45,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
+                    return res.json('Error en la autetificación.');
                 });
         }
     });
@@ -98,6 +99,7 @@ function cargarRutas() {
     });
 
     app.post('/profesores', function (req, res, next) {
+        console.log(req.body);
         if (req.body.usuario !== undefined) {
             modelos.profesores.findOne({ where: { usuario: req.body.usuario } })
                 .then(function (result) {
@@ -108,6 +110,7 @@ function cargarRutas() {
                 })
                 .catch(function (err) {
                     console.log(err);
+                    return res.json('Error en la autetificación.');
                 });
         }
     });
@@ -165,7 +168,8 @@ function cargarRutas() {
     });
 
     app.post('/insertar_nota', function (req, res, next) {
-        if (req.body.id_alumno && req.body.nota && req.body.nombre && req.body.observaciones && req.body.id_asignatura) {
+        if (req.body.id_alumno !== undefined && req.body.nota !== undefined
+            && req.body.nombre !== undefined && req.body.observaciones && req.body.id_asignatura !== undefined) {
             return modelos.sequelize.transaction(function (t) {
                 // chain all your queries here. make sure you return them.
                 return modelos.notas.create({
@@ -188,8 +192,9 @@ function cargarRutas() {
     });
 
     app.post('/insertar_evento', function (req, res, next) {
-        if ((req.body.id_alumno || req.body.id_profesor) && req.body.sesion && req.body.tipo) {
-            console.log(req.body);
+        console.log(req.body);
+        if ((req.body.id_alumno !== undefined || req.body.id_profesor !== undefined)
+            && req.body.sesion !== undefined && req.body.tipo !== undefined) {
             return modelos.sequelize.transaction(function (t) {
                 // chain all your queries here. make sure you return them.
                 return modelos.eventos.create({
@@ -212,10 +217,12 @@ function cargarRutas() {
     });
 
     app.post('/cambiarEvento', function (req, res, next) {
-        if (req.body.id_evento && req.body.visible) {
-            return modelos.alumnos.update({
-                contra: req.body.nuevaContra
-            }, { where: { id: req.body.id } }
+        console.log('Cambiando Evento');
+        console.log(req.body);
+        if (req.body.id_evento !== undefined && req.body.visible !== undefined) {
+            return modelos.eventos.update({
+                visible: req.body.visible
+            }, { where: { id: req.body.id_evento } }
             ).then(function (result) {
                 res.json({ message: 'Modificación exitosa.' });
             }).catch(function (err) {
@@ -226,10 +233,15 @@ function cargarRutas() {
     });
 
     app.post('/cambiarNota', function (req, res, next) {
-        if (req.body.id_nota && req.body.nota) {
+        console.log(req.body);
+        if (req.body.nota.id_nota !== undefined && req.body.nota.id_asignatura !== undefined
+            && req.body.nota.nombre !== undefined && req.body.nota.nota !== undefined) {
             return modelos.notas.update({
-                nota: req.body.nota
-            }, { where: { id: req.body.id_nota } }
+                id_asignatura: req.body.nota.id_asignatura,
+                nombre: req.body.nota.nombre,
+                nota: req.body.nota.nota,
+                observaciones: req.body.nota.observaciones
+            }, { where: { id: req.body.nota.id_nota } }
             ).then(function (result) {
                 res.json({ message: 'Modificación nota exitosa.' });
             }).catch(function (err) {

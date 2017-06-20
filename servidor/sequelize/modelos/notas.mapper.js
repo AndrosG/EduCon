@@ -37,7 +37,8 @@ module.exports = function (sequelize, DataTypes) {
         },
         nota: {
             type: DataTypes.FLOAT,
-            field: 'nota'
+            field: 'nota',
+            allowNull: false
         },
         observaciones: {
             type: DataTypes.STRING,

@@ -181,9 +181,10 @@ function obtenerDatos($http) {
             }
         },
 
-        cambiarNota: function (id_nota, nota) {
-            if (id_nota !== undefined && nota !== undefined) {
-                $http.post(SERVERURL + '/cambiarNota', { id_nota: id_nota, nota: nota })
+        cambiarNota: function (nota) {
+            if (nota.id_nota !== undefined && nota.id_asignatura !== undefined
+                && nota.nombre !== undefined && nota.nota !== undefined) {
+                $http.post(SERVERURL + '/cambiarNota', { nota: nota })
                     .then(function (res) {
                         return res;
                     })
