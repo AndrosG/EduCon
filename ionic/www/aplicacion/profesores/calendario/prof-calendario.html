@@ -4,11 +4,11 @@
     <button class="button button-icon ion-android-add-circle" ng-click="addEvento()"></button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="card" ng-repeat="e in eventos | orderBy:'fecha'">
+    <div class="card" ng-repeat="e in eventos | orderBy:'fecha'" ng-if="e.visible">
       <div class="item item-divider">
-        {{e.titulo}}
+        {{e.tipo}}
         <button class="ion-android-delete botonBorrarEvento"
-                ng-click="borrarEvento()"></button>
+                ng-click="borrarEvento(e)"></button>
       </div>
       <div class="item item-text-wrap">
         <p>{{e.descripcion}}</p>

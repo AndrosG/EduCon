@@ -69,13 +69,15 @@ function controlador($scope, $ionicPopup, $ionicLoading, ObtenerDatosSrv, $http)
     }).then(function (res) {
       if (res) {
         for(var i=0; i<$scope.alumnos.length; i++){
+          var sesion = 0;
           if ($scope.alumnos[i].falta){
-            console.log(new Date().toLocaleString());
-            ponerIncidencia($scope.alumnos[i].id, ObtenerDatosSrv.user.data.id, new Date(), 'FALTA', '');
+            sesion = obtenerSesion();
+            ponerIncidencia($scope.alumnos[i].id, ObtenerDatosSrv.user.data.id, sesion, 'FALTA', '');
             $scope.alumnos[i].falta = false;
           }
           if ($scope.alumnos[i].retraso){
-            ponerIncidencia($scope.alumnos[i].id, ObtenerDatosSrv.user.data.id, new Date(), 'RETRASO', '');
+            sesion = obtenerSesion();
+            ponerIncidencia($scope.alumnos[i].id, ObtenerDatosSrv.user.data.id, sesion, 'RETRASO', '');
             $scope.alumnos[i].retraso = false;
           }
         }
@@ -104,5 +106,45 @@ function controlador($scope, $ionicPopup, $ionicLoading, ObtenerDatosSrv, $http)
       .catch(function (err) {
         console.log(err);
       });
+  }
+
+  function obtenerSesion() {
+    var fecha = new Date();
+    var hora = fecha.getHours();
+    var minuto = fecha.getMinutes();
+
+    if(8 == hora){
+      return 1;
+    } else if (9 == hora){
+      if (minuto < 10){
+        return 1;
+      } else {
+        return 2;
+      }
+    } else if (10 == hora){
+      if (minuto < 5){
+        return 2;
+      } else {
+        return 3;
+      }
+    } else if (11 == hora){
+      return 5;
+    } else if (12 == hora){
+      if (minuto < 25){
+        return 5;
+      } else {
+        return 6;
+      }
+    } else if (13 == hora){
+      if (minuto < 20){
+        return 6;
+      } else {
+        return 7;
+      }
+    } else if (14 == hora){
+      return 7;
+    } else {
+      return null;
+    }
   }
 }

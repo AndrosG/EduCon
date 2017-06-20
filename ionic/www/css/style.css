@@ -41,6 +41,12 @@
   background-color: red;
 }
 
+.nada{
+  float: right;
+  border-radius: 10px;
+  background-color: darkgrey;
+}
+
 .botonBorrarEvento{
   float: right;
   background: none;

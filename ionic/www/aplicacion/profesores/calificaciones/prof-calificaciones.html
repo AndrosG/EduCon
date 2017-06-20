@@ -4,33 +4,33 @@
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
-      <div class="card" ng-repeat="asig in asignaturas">
+      <div class="card" ng-repeat="asig in asignaturas_profesor">
         <div class="item item-divider" ng-click="asig.showAsig = !asig.showAsig">
-          {{asig.curso}} - {{asig.nombre}}
+          {{asig.asignatura}}
         </div>
         <div class="item item-text-wrap" ng-if="asig.showAsig">
           <div class="list">
-            <div class="card" ng-repeat="alum in asig.alumnos" style="margin-top: 5px; margin-bottom: 5px;">
+            <div class="card" ng-repeat="alum in alumnos" style="margin-top: 5px; margin-bottom: 5px;" ng-if="alum.id_clase == asig.id_clase">
               <div class="item item-divider" ng-click="alum.showAlu = !alum.showAlu">
                 {{alum.nombre}} {{alum.apellidos}}
-                <button ng-class="{aprobado: alum.notaFinal>=5, suspenso: alum.notaFinal<5}"
-                        ng-click="cambiaNotaFinal()">{{alum.notaFinal}}</button>
+                <button ng-class="{aprobado: alum.notaFinal>=5, suspenso: alum.notaFinal<5, nada: alum.notaFinal == '-'}"
+                        ng-click="cambiaNotaFinal(alum, asig)">{{alum.notaFinal}}</button>
               </div>
               <div class="item item-text-wrap" ng-if="alum.showAlu">
                 <div class="list">
-                  <div class="card" ng-repeat="nota in alum.notas" style="margin-top: 1px; margin-bottom: 1px;">
+                  <div class="card" ng-repeat="nota in notas" style="margin-top: 1px; margin-bottom: 1px;" ng-if="alum.id == nota.id_alumno && asig.asignatura == nota.asignatura">
                     <div class="item item-divider item-button-right" style="padding-bottom: 15px;">
-                      {{nota.titulo}}
+                      {{nota.nombre}}
                       <button class="button button-icon" ng-click="editarNota(nota)">
                         <i class="icon ion-edit"></i>
                       </button>
                     </div>
                     <div class="item item-text-wrap" ng-if="alum.showAlu">
-                      {{nota.puntuacion}} - {{nota.observaciones}}
+                      {{nota.nota}} - {{nota.observaciones}}
                     </div>
                   </div>
                 </div>
-                <button class="button button-positive" style="margin: 0 40%;" ng-click="editarNota()">Añadir</button>
+                <button class="button button-positive" style="margin: 0 40%;" ng-click="insertaNota(alum, asig)">Añadir</button>
               </div>
             </div>
           </div>

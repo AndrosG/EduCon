@@ -3,69 +3,27 @@
     <h1 class="title">HORARIO</h1>
   </ion-header-bar>
   <ion-content class="padding" style="text-align: center;">
-    <div class="row">
-      <div class="col">Hora </div>
-      <div class="col">LUNES</div>
-      <div class="col">MARTES</div>
-      <div class="col">MIÉRCOLES</div>
-      <div class="col">JUEVES</div>
-      <div class="col">VIERNES</div>
-    </div>
-    <div class="row">
-      <div class="col">08:15 - 9:10</div>
-      <div class="col">LUNES</div>
-      <div class="col">MARTES</div>
-      <div class="col">MIÉRCOLES</div>
-      <div class="col">JUEVES</div>
-      <div class="col">VIERNES</div>
-    </div>
-    <div class="row">
-      <div class="col">09:10 - 10:05</div>
-      <div class="col">LUNES</div>
-      <div class="col">MARTES</div>
-      <div class="col">MIÉRCOLES</div>
-      <div class="col">JUEVES</div>
-      <div class="col">VIERNES</div>
-    </div>
-    <div class="row">
-      <div class="col">10:05 - 11:00</div>
-      <div class="col">LUNES</div>
-      <div class="col">MARTES</div>
-      <div class="col">MIÉRCOLES</div>
-      <div class="col">JUEVES</div>
-      <div class="col">VIERNES</div>
-    </div>
-    <div class="row">
-      <div class="col">11:00 - 11:30</div>
-      <div class="col">RECREO</div>
-      <div class="col">RECREO</div>
-      <div class="col">RECREO</div>
-      <div class="col">RECREO</div>
-      <div class="col">RECREO</div>
-    </div>
-    <div class="row">
-      <div class="col">11:30 - 12:25</div>
-      <div class="col">LUNES</div>
-      <div class="col">MARTES</div>
-      <div class="col">MIÉRCOLES</div>
-      <div class="col">JUEVES</div>
-      <div class="col">VIERNES</div>
-    </div>
-    <div class="row">
-      <div class="col">12:25 - 13:20</div>
-      <div class="col">LUNES</div>
-      <div class="col">MARTES</div>
-      <div class="col">MIÉRCOLES</div>
-      <div class="col">JUEVES</div>
-      <div class="col">VIERNES</div>
-    </div>
-    <div class="row">
-      <div class="col">13:20 - 14:15</div>
-      <div class="col">LUNES</div>
-      <div class="col">MARTES</div>
-      <div class="col">MIÉRCOLES</div>
-      <div class="col">JUEVES</div>
-      <div class="col">VIERNES</div>
+    <div class="list">
+      <div ng-if="horario.dia1.length > 0">
+        <h3 class="item item-divider">LUNES</h3>
+        <div class="item" ng-repeat="hora in horario.dia1">{{hora.hora}} - {{hora.asignatura}}</div>
+      </div>
+      <div ng-if="horario.dia2.length > 0">
+        <h3 class="item item-divider">MARTES</h3>
+        <div class="item" ng-repeat="hora in horario.dia2">{{hora.hora}} - {{hora.asignatura}}</div>
+      </div>
+      <div ng-if="horario.dia3.length > 0">
+        <h3 class="item item-divider">MIERCOLES</h3>
+        <div class="item" ng-repeat="hora in horario.dia3">{{hora.hora}} - {{hora.asignatura}}</div>
+      </div>
+      <div ng-if="horario.dia4.length > 0">
+        <h3 class="item item-divider">JUEVES</h3>
+        <div class="item" ng-repeat="hora in horario.dia4">{{hora.hora}} - {{hora.asignatura}}</div>
+      </div>
+      <div ng-if="horario.dia5.length > 0">
+        <h3 class="item item-divider">VIERNES</h3>
+        <div class="item" ng-repeat="hora in horario.dia5">{{hora.hora}} - {{hora.asignatura}}</div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
