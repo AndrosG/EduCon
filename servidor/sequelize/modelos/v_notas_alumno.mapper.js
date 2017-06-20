@@ -15,6 +15,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             field: 'id_alumno',
         },
+        id_asignatura: {
+            type: DataTypes.STRING,
+            field: 'id_asignatura'
+        },
         asignatura: {
             type: DataTypes.STRING,
             field: 'asignatura'

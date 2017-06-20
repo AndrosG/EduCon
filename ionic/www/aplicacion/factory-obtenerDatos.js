@@ -131,7 +131,7 @@ function obtenerDatos($http) {
                 $http.post(SERVERURL + '/insertar_evento'
                     , {
                         id_alumno: id_alumno,
-                        id_prof: id_profesor,
+                        id_profesor: id_profesor,
                         sesion: sesion,
                         tipo: tipo,
                         descripcion: descripcion

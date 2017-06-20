@@ -244,6 +244,7 @@ function cargarRutas() {
                 observaciones: req.body.nota.observaciones
             }, { where: { id: req.body.nota.id_nota } }
             ).then(function (result) {
+                console.log(result);
                 res.json({ message: 'Modificación nota exitosa.' });
             }).catch(function (err) {
                 console.log(err);
