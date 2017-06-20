@@ -168,8 +168,9 @@ function cargarRutas() {
     });
 
     app.post('/insertar_nota', function (req, res, next) {
+        console.log(req.body);
         if (req.body.id_alumno !== undefined && req.body.nota !== undefined
-            && req.body.nombre !== undefined && req.body.observaciones && req.body.id_asignatura !== undefined) {
+            && req.body.nombre !== undefined && req.body.observaciones !== undefined && req.body.id_asignatura !== undefined) {
             return modelos.sequelize.transaction(function (t) {
                 // chain all your queries here. make sure you return them.
                 return modelos.notas.create({
@@ -235,7 +236,7 @@ function cargarRutas() {
     app.post('/cambiarNota', function (req, res, next) {
         console.log(req.body);
         if (req.body.nota.id_nota !== undefined && req.body.nota.id_asignatura !== undefined && req.body.nota.id_alumno !== undefined
-            && req.body.nota.nombre !== undefined && req.body.nota.nota !== undefined) {
+            && req.body.nota.nombre !== undefined && req.body.nota.nota !== undefined && req.body.nota.observaciones !== undefined) {
             return modelos.notas.update({
                 id_alumno: req.body.id_alumno,
                 id_asignatura: req.body.nota.id_asignatura,

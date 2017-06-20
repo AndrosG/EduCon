@@ -12,9 +12,9 @@ var sequelize = new Sequelize('educon', 'root', 'educon', {
         timestamps: false
     },
     pool: {
-        max: 10,
-        min: 5,
-        idle: 10000
+        max: 1,
+        min: 1,
+        idle: 1000
     },
     // SQLite only
     //storage: 'path/to/database.sqlite'
