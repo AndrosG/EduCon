@@ -35,7 +35,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             field: 'apellidos_alu'
         },
-        id_profesor: {
+        id_prof: {
             type: DataTypes.INTEGER,
             field: 'id_prof'
         },

@@ -148,6 +148,18 @@ function cargarRutas() {
         }
     });
 
+    app.post('/eventos_profesor', function (req, res, next) {
+        if (req.body.id_prof !== undefined) {
+            modelos.v_eventos.findAll({ where: { id_prof: req.body.id_prof } })
+                .then(function (result) {
+                    return res.json(result);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+    });
+
     app.post('/test', function (req, res, next) {
         return res.json({ message: 'Conexión funciona.' });
     });
@@ -210,6 +222,20 @@ function cargarRutas() {
                 console.log(err);
                 res.json({ message: "Fallo." });
             });     
+        }
+    });
+
+    app.post('/cambiarNota', function (req, res, next) {
+        if (req.body.id_nota && req.body.nota) {
+            return modelos.notas.update({
+                nota: req.body.nota
+            }, { where: { id: req.body.id_nota } }
+            ).then(function (result) {
+                res.json({ message: 'Modificación nota exitosa.' });
+            }).catch(function (err) {
+                console.log(err);
+                res.json({ message: "Fallo." });
+            });
         }
     });
 

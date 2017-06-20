@@ -79,7 +79,18 @@ function obtenerDatos($http) {
                     });
             }
         },
-
+        getEventosProfesor: function (id_prof) {
+            if (id_prof !== undefined) {
+                $http.post(SERVERURL + '/eventos_profesor', { id_prof: id_prof })
+                    .then(function (res) {
+                        user.eventos_prof = res.data;
+                        return res.data;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+            }
+        },
         //Es muy probable que necesites un contador para recorres los alumnos de una clase.
         getAlumnosClase: function (id_clase/*, contador*/) {
             if (id_clase !== undefined) {
@@ -120,7 +131,7 @@ function obtenerDatos($http) {
                 $http.post(SERVERURL + '/insertar_evento'
                     , {
                         id_alumno: id_alumno,
-                        id_profesor: id_profesor,
+                        id_prof: id_profesor,
                         sesion: sesion,
                         tipo: tipo,
                         descripcion: descripcion
@@ -161,6 +172,18 @@ function obtenerDatos($http) {
         cambiarEvento: function (id_evento, visible) {
             if (id_evento !== undefined && visible !== undefined) {
                 $http.post(SERVERURL + '/cambiarEvento', { id_evento: id_evento, visible: visible })
+                    .then(function (res) {
+                        return res;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+            }
+        },
+
+        cambiarNota: function (id_nota, nota) {
+            if (id_nota !== undefined && nota !== undefined) {
+                $http.post(SERVERURL + '/cambiarNota', { id_nota: id_nota, nota: nota })
                     .then(function (res) {
                         return res;
                     })
