@@ -10,7 +10,7 @@
     <div class="list">
       <div class="card" ng-repeat="asig in asignaturas_profesor">
         <div class="item item-divider" ng-click="asig.showAsig = !asig.showAsig">
-          {{asig.asignatura}}
+          {{asig.asignatura}} - Grupo {{asig.grupo}}
         </div>
         <div class="item item-text-wrap" ng-if="asig.showAsig">
           <div class="list">
