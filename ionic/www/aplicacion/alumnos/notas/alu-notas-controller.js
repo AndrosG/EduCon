@@ -19,7 +19,17 @@ function controlador($scope, ObtenerDatosSrv, $http) {
 
   $http.post(SERVERURL + '/notas_alumno', { id_alumno: ObtenerDatosSrv.user.data.id })
     .then(function (res) {
-      $scope.notas = res.data;
+      for(var i=0; i<res.data.length; i++){
+        if(res.data[i].nombre == 'notaFinal'){
+          for(var j=0; j<$scope.asignaturas.length; j++){
+            if($scope.asignaturas[j].asignatura == res.data[i].asignatura){
+              $scope.asignaturas[j].notaFinal = res.data[i].nota;
+            }
+          }
+        } else {
+          $scope.notas.push(res.data[i]);
+        }
+      }
     })
     .catch(function (err) {
       console.log(err);

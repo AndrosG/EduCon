@@ -7,7 +7,9 @@
       <div class="card" ng-repeat="asig in asignaturas">
         <div class="item item-divider" ng-click="asig.showAsig = !asig.showAsig">
           {{asig.asignatura}}
-          <span style="float: right;">{{asig.notaFinal}}</span>
+          <button ng-class="{aprobado: asig.notaFinal>=5, suspenso: asig.notaFinal<5}" ng-if="asig.notaFinal">
+            {{asig.notaFinal}}
+          </button>
         </div>
         <div class="item item-text-wrap" ng-if="asig.showAsig">
           <div class="list">
