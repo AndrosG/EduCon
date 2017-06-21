@@ -3,6 +3,7 @@ angular.module('starter')
 
 function controlador($scope, ObtenerDatosSrv, $http, $ionicPopup) {
   var SERVERURL = 'http://80.49.113.168:9095';
+
   $scope.eventos = [];
   $scope.data = {};
   /*$scope.eventos = [
