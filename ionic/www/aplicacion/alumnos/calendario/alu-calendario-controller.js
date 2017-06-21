@@ -9,6 +9,15 @@ function controlador($scope, ObtenerDatosSrv, $http, $ionicPopup) {
   $http.post(SERVERURL + '/eventos_alumno', {id_alumno: ObtenerDatosSrv.user.data.id})
     .then(function (res) {
       $scope.eventos = res.data;
+      for(var i=0; i<$scope.eventos.length; i++){
+        var str = $scope.eventos[i].fecha.split('T');
+        var str2 = str[0].split('-');
+        var dia = str2[2];
+        var mes = str2[1];
+        var ano = str2[0];
+
+        $scope.eventos[i].fecha = dia + '/' + mes + '/' + ano;
+      }
     })
     .catch(function (err) {
       console.log(err);
@@ -37,6 +46,15 @@ function controlador($scope, ObtenerDatosSrv, $http, $ionicPopup) {
           $http.post(SERVERURL + '/eventos_alumno', {id_alumno: ObtenerDatosSrv.user.data.id})
             .then(function (res) {
               $scope.eventos = res.data;
+              for(var i=0; i<$scope.eventos.length; i++){
+                var str = $scope.eventos[i].fecha.split('T');
+                var str2 = str[0].split('-');
+                var dia = str2[2];
+                var mes = str2[1];
+                var ano = str2[0];
+
+                $scope.eventos[i].fecha = dia + '/' + mes + '/' + ano;
+              }
             })
             .catch(function (err) {
               console.log(err);
@@ -86,6 +104,15 @@ function controlador($scope, ObtenerDatosSrv, $http, $ionicPopup) {
                   $http.post(SERVERURL + '/eventos_alumno', {id_alumno: ObtenerDatosSrv.user.data.id})
                     .then(function (res) {
                       $scope.eventos = res.data;
+                      for(var i=0; i<$scope.eventos.length; i++){
+                        var str = $scope.eventos[i].fecha.split('T');
+                        var str2 = str[0].split('-');
+                        var dia = str2[2];
+                        var mes = str2[1];
+                        var ano = str2[0];
+
+                        $scope.eventos[i].fecha = dia + '/' + mes + '/' + ano;
+                      }
                     })
                     .catch(function (err) {
                       console.log(err);
