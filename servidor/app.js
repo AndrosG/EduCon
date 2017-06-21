@@ -33,6 +33,23 @@ conectaraBD();
 cargarRutas();
 arrancarServicio();
 
+function arrancarServicio() {
+    var server = http.createServer(app);
+    server.listen(PORT);
+    console.log('Servidor escuchando en puerto ' + PORT);
+}
+
+function conectaraBD() {
+    //Conexión Sequelize
+    modelos.sequelize
+        .authenticate()
+        .then(function () {
+            console.log('Conexión con éxito a la base de datos.');
+        }, function (err) {
+            console.log('No se ha podido conectar a la base de datos. Error:', err);
+        });
+}
+
 function cargarRutas() {
     app.post('/alumnos', function (req, res, next) {
         if (req.body.id !== undefined) {
@@ -168,7 +185,6 @@ function cargarRutas() {
     });
 
     app.post('/insertar_nota', function (req, res, next) {
-        console.log(req.body);
         if (req.body.id_alumno !== undefined && req.body.nota !== undefined
             && req.body.nombre !== undefined && req.body.observaciones !== undefined && req.body.id_asignatura !== undefined) {
             return modelos.sequelize.transaction(function (t) {
@@ -193,7 +209,6 @@ function cargarRutas() {
     });
 
     app.post('/insertar_evento', function (req, res, next) {
-        console.log(req.body);
         if ((req.body.id_alumno !== undefined || req.body.id_profesor !== undefined)
             && req.body.sesion !== undefined && req.body.tipo !== undefined) {
             return modelos.sequelize.transaction(function (t) {
@@ -219,7 +234,6 @@ function cargarRutas() {
 
     app.post('/cambiarEvento', function (req, res, next) {
         console.log('Cambiando Evento');
-        console.log(req.body);
         if (req.body.id_evento !== undefined && req.body.visible !== undefined) {
             return modelos.eventos.update({
                 visible: req.body.visible
@@ -229,12 +243,11 @@ function cargarRutas() {
             }).catch(function (err) {
                 console.log(err);
                 res.json({ message: "Fallo." });
-            });     
+            });
         }
     });
 
     app.post('/cambiarNota', function (req, res, next) {
-        console.log(req.body);
         if (req.body.nota.id_nota !== undefined && req.body.nota.id_asignatura !== undefined && req.body.nota.id_alumno !== undefined
             && req.body.nota.nombre !== undefined && req.body.nota.nota !== undefined && req.body.nota.observaciones !== undefined) {
             return modelos.notas.update({
@@ -290,22 +303,4 @@ function cargarRutas() {
             }
         }
     });
-}
-
-function arrancarServicio() {
-    var server = http.createServer(app);
-    server.listen(PORT);
-    console.log('Servidor escuchando en puerto ' + PORT);
-    console.log(modelos);
-}
-
-function conectaraBD() {
-    //Conexión Sequelize
-    modelos.sequelize
-        .authenticate()
-        .then(function () {
-            console.log('Conexión con éxito a la base de datos.');
-        }, function (err) {
-            console.log('No se ha podido conectar a la base de datos. Error:', err);
-        });
 }
